@@ -20,6 +20,8 @@ BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-Sphinx >= 1.6.5
 BuildRequires:	python3-jinja2 >= 2.3
+BuildRequires:	python3-pluggy
+BuildRequires:	python3-py
 BuildRequires:	python3-pytest
 %endif
 BuildRequires:	rpm-pythonprov
