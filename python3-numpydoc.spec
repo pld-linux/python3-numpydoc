@@ -8,7 +8,7 @@ Summary:	Sphinx extension to support docstrings in Numpy format
 Summary(pl.UTF-8):	Rozszerzenie Sphinksa do obsług docstringów w formacie Numpy
 Name:		python3-numpydoc
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/numpydoc/
