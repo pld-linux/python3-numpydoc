@@ -2,19 +2,17 @@
 # Conditional build:
 %bcond_with	doc	# Sphinx documentation (TODO)
 %bcond_without	tests	# unit tests
-%bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
 
 Summary:	Sphinx extension to support docstrings in Numpy format
 Summary(pl.UTF-8):	Rozszerzenie Sphinksa do obsług docstringów w formacie Numpy
 Name:		python3-numpydoc
-Version:	1.5.0
-Release:	3
+Version:	1.8.0
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/numpydoc/
 Source0:	https://files.pythonhosted.org/packages/source/n/numpydoc/numpydoc-%{version}.tar.gz
-# Source0-md5:	ec7dc7d9ac9e83ac3fd8722aca25bc5c
+# Source0-md5:	f1dcf7f9e10d72680a6ff71607cce99b
 URL:		https://pypi.org/project/numpydoc/
 BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools
@@ -23,6 +21,7 @@ BuildRequires:	python3-Sphinx >= 4.2
 BuildRequires:	python3-jinja2 >= 2.10
 BuildRequires:	python3-pytest
 BuildRequires:	python3-pytest-cov
+BuildRequires:	python3-tabulate
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -51,7 +50,7 @@ dodaje także dyrektywy opisu kodu "np:function", "np-c:function" itp.
 %setup -q -n numpydoc-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
@@ -62,17 +61,15 @@ PYTEST_PLUGINS="pytest_cov.plugin" \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
+%py3_install_pyproject
 
 %{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/numpydoc/tests
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with python2}
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.txt README.rst
 %{py3_sitescriptdir}/numpydoc
-%{py3_sitescriptdir}/numpydoc-%{version}-py*.egg-info
-%endif
+%{py3_sitescriptdir}/numpydoc-%{version}.dist-info
